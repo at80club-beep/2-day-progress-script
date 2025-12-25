@@ -6,6 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <style>
+    /* ▼ リンクが反応しない問題の修正 ▼ */
+header {
+  pointer-events: none;
+}
+
+#font-controls,
+nav {
+  pointer-events: auto;
+}
+/* ▲ 修正ここまで ▲ */
     body {
       margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
