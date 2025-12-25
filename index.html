@@ -1,186 +1,455 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ものづくり教室 進行台本（先生用）</title>
+
+<title>ものづくり教室｜指導員用レシピ台本</title>
 
 <style>
-  body {
-    margin: 0;
-    font-family: system-ui, sans-serif;
-    background: #faf7f2;
-    color: #333;
-  }
+/* ------------------------------
+   ベースデザイン（レシピ本風）
+------------------------------ */
+body {
+  font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
+  background: #f7f3e9; /* やさしいベージュ */
+  margin: 0;
+  padding: 0;
+  line-height: 1.7;
+  color: #333;
+}
 
-  /* 文字サイズ（クラス切替方式） */
-  body.font-small { font-size: 14px; }
-  body.font-medium { font-size: 16px; }
-  body.font-large { font-size: 20px; }
+/* コンテンツ幅 */
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
 
-  h2 { font-size: 1.4em; margin: 0; }
-  h3 { font-size: 1.2em; margin: 0; }
+/* タイトル */
+h1 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
 
-  header {
-    position: sticky;
-    top: 0;
-    background: #fff7dd;
-    border-bottom: 1px solid #e0d7c2;
-    padding: 10px 12px;
-    z-index: 100;
-  }
+/* 文字サイズ切替ボタン */
+.font-buttons {
+  text-align: right;
+  margin-bottom: 15px;
+}
+.font-buttons button {
+  padding: 6px 12px;
+  margin-left: 5px;
+  border: none;
+  border-radius: 6px;
+  background: #d8c9a7;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.font-buttons button:hover {
+  background: #c7b894;
+}
 
-  header h1 {
-    font-size: 18px;
-    margin: 0 0 6px;
-  }
+/* ------------------------------
+   アコーディオン（STEP）
+------------------------------ */
+.accordion {
+  background: #fff;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  overflow: hidden;
+}
 
-  /* 文字サイズボタン（丸・かわいい） */
-  #font-controls {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 8px;
-  }
+.accordion summary {
+  padding: 16px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  list-style: none;
+  background: #f0e7d8;
+}
 
-  #font-controls button {
-    padding: 6px 12px;
-    border-radius: 999px;
-    border: none;
-    background: #ffeecb;
-    color: #6b4a1f;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
-    transition: 0.15s;
-  }
+.accordion summary::-webkit-details-marker {
+  display: none;
+}
 
-  #font-controls button.active {
-    background: #ffcf70;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.25);
-  }
+/* 中身 */
+.accordion .content {
+  padding: 16px;
+  background: #fff;
+}
 
-  /* アコーディオン */
-  .accordion-item {
-    background: #fffdf8;
-    margin: 10px;
-    border-radius: 12px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    border: 1px solid #f0e6d2;
-  }
+/* 台本（常に表示） */
+.script-box {
+  background: #fff8e6;
+  border-left: 6px solid #e0b85c;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
 
-  .accordion-header {
-    padding: 14px;
-    font-size: 1.1em;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+/* スライド内容（折りたたみ） */
+.slide-toggle {
+  margin-top: 10px;
+  padding: 10px;
+  background: #e8e1d4;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+.slide-content {
+  display: none;
+  background: #f5efe4;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 6px;
+}
 
-  .accordion-header span {
-    font-size: 1.2em;
-  }
-
-  .accordion-content {
-    display: none;
-    padding: 14px;
-    border-top: 1px solid #f0e6d2;
-    background: #ffffff;
-    border-radius: 0 0 12px 12px;
-  }
-
-  .say {
-    padding-left: 12px;
-    border-left: 3px solid #ffe0a8;
-    margin: 6px 0;
-  }
-
-  .label {
-    display: inline-block;
-    font-size: 11px;
-    padding: 2px 6px;
-    border-radius: 999px;
-    background: #f6eee0;
-    color: #7a5b27;
-    margin-right: 4px;
-  }
+/* スマホ最適化 */
+@media (max-width: 600px) {
+  h1 { font-size: 1.4rem; }
+  .accordion summary { font-size: 1.1rem; }
+}
 </style>
 </head>
+  
 
-<body class="font-medium">
+<body>
+<body>
+<div class="container">
 
-<header>
-  <h1>ものづくり教室 進行台本（先生用）</h1>
+<h1>ものづくり教室｜指導員レシピ台本（1日目）</h1>
 
-  <div id="font-controls">
-    <button data-size="small">小</button>
-    <button data-size="medium" class="active">中</button>
-    <button data-size="large">大</button>
-  </div>
-</header>
+<div class="font-buttons">
+  <button onclick="setFontSize('small')">小</button>
+  <button onclick="setFontSize('medium')">中</button>
+  <button onclick="setFontSize('large')">大</button>
+</div>
 
-<main>
 
-  <!-- ▼▼▼ ここにアコーディオン項目を入れる（後であなたの台本全文を流し込む） ▼▼▼ -->
+<!-- ============================
+     STEP1
+============================= -->
+<details class="accordion">
+  <summary>STEP1：今日のミッション</summary>
+  <div class="content">
 
-  <div class="accordion-item">
-    <div class="accordion-header">
-      <div>1日目：導入（10分）</div>
-      <span>▶</span>
+    <div class="script-box">
+      <strong>先生の読み上げ</strong><br>
+      「みなさん、ようこそ。今日から2日間、みんなで“動くマシン”を作ります。まずは電気のしくみを知って、車の心臓部を作ります。」
     </div>
-    <div class="accordion-content">
-      <p>ここに本文が入ります。</p>
+
+    <div class="slide-toggle" onclick="toggleSlide(this)">▶ スライド内容を開く</div>
+    <div class="slide-content">
+      ものづくり教室 はじまるよ！<br>
+      今日のミッション：<br>
+      電気のしくみを知って、電池BOXを完成させよう！
     </div>
+
   </div>
+</details>
 
-  <!-- ▲▲▲ この部分にあなたの台本全文を入れた「完全フル版」を次に作る ▲▲▲ -->
 
-</main>
+<!-- ============================
+     STEP2
+============================= -->
+<details class="accordion">
+  <summary>STEP2：準備しよう</summary>
+  <div class="content">
 
+    <div class="script-box">
+      <strong>先生の読み上げ</strong><br>
+      「4人そろった班から、静かに左のドアへ。道具箱とカッターマットを取って戻りましょう。」
+    </div>
+
+    <div class="slide-toggle" onclick="toggleSlide(this)">▶ スライド内容を開く</div>
+    <div class="slide-content">
+      - 4人そろったら静かに左のドアへ<br>
+      - 道具箱とカッターマットを取る<br>
+      - 席に戻って材料を受け取る<br>
+      - 見本とプリントを読む
+    </div>
+
+  </div>
+</details>
+
+
+<!-- ============================
+     STEP3
+============================= -->
+<details class="accordion">
+  <summary>STEP3：秘密ミッション発動！</summary>
+  <div class="content">
+
+    <div class="script-box">
+      <strong>先生の読み上げ</strong><br>
+      「今日の資料には、わざと間違いがあります。探偵になったつもりで見つけてください。仲間と協力して乗り越えるのがミッションです。」
+    </div>
+
+    <div class="slide-toggle" onclick="toggleSlide(this)">▶ スライド内容を開く</div>
+    <div class="slide-content">
+      - 資料には“わざと間違い”がある<br>
+      - ピンチは不良品じゃない<br>
+      - One Team で乗り越えよう！
+    </div>
+
+  </div>
+</details>
+
+
+<!-- ============================
+     STEP4
+============================= -->
+<details class="accordion">
+  <summary>STEP4：電気の基本（向き・LED）</summary>
+  <div class="content">
+
+    <div class="script-box">
+      <strong>先生の読み上げ</strong><br>
+      「電気は水の流れのように“向き”があります。LEDは向きが合うと光ります。逆だと光りません。」
+    </div>
+
+    <div class="slide-toggle" onclick="toggleSlide(this)">▶ スライド内容を開く</div>
+    <div class="slide-content">
+      - 電気には“向き”がある<br>
+      - LEDは向きが合うと光る<br>
+      - 逆だと光らない<br><br>
+      【LEDのひみつ】<br>
+      - 長い足 → プラス<br>
+      - 短い足 → マイナス<br>
+      - 一方通行のルール<br><br>
+      【光らない理由】<br>
+      → 向きが逆！
+    </div>
+
+  </div>
+</details>
+
+
+<!-- ============================
+     STEP5
+============================= -->
+<details class="accordion">
+  <summary>STEP5：チェッカー体験</summary>
+  <div class="content">
+
+    <div class="script-box">
+      <strong>先生の読み上げ</strong><br>
+      「LEDの光り方で、電気の向きがわかります。赤は右向き、緑は左向きです。」
+    </div>
+
+    <div class="slide-toggle" onclick="toggleSlide(this)">▶ スライド内容を開く</div>
+    <div class="slide-content">
+      - 赤 → 右向き<br>
+      - 緑 → 左向き<br>
+      - 電気の向きが“見える”！
+    </div>
+
+  </div>
+</details>
+
+
+<!-- ============================
+     STEP6
+============================= -->
+<details class="accordion">
+  <summary>STEP6：電池BOXをつくろう</summary>
+  <div class="content">
+
+    <div class="script-box">
+      <strong>先生の読み上げ</strong><br>
+      「完成品を見ながら、班で相談して作りましょう。電線が外れやすいときは、磁石と銅線で固定します。」
+    </div>
+
+    <div class="slide-toggle" onclick="toggleSlide(this)">▶ スライド内容を開く</div>
+    <div class="slide-content">
+      - 完成品を見ながら相談<br>
+      - みんなで協力して作る<br>
+      - 電線が外れやすい → 磁石＋銅線で解決
+    </div>
+
+  </div>
+</details>
+<!-- ============================
+     STEP7
+============================= -->
+<details class="accordion">
+  <summary>STEP7：点灯チェック！</summary>
+  <div class="content">
+
+    <div class="script-box">
+      <strong>先生の読み上げ</strong><br>
+      「光ったら大成功です。つかないときは、もう一度チャレンジしましょう。」
+    </div>
+
+    <div class="slide-toggle" onclick="toggleSlide(this)">▶ スライド内容を開く</div>
+    <div class="slide-content">
+      光ったら大成功！<br>
+      つかない？ → もう一度チャレンジ！
+    </div>
+
+  </div>
+</details>
+
+
+<!-- ============================
+     STEP8
+============================= -->
+<details class="accordion">
+  <summary>STEP8：名前をつけよう</summary>
+  <div class="content">
+
+    <div class="script-box">
+      <strong>先生の読み上げ</strong><br>
+      「この道具に名前をつけましょう。ヒントは“光る”と“プラマイ”です。」
+    </div>
+
+    <div class="slide-toggle" onclick="toggleSlide(this)">▶ スライド内容を開く</div>
+    <div class="slide-content">
+      この道具の名前は…？<br>
+      ヒント：光る・プラマイ<br><br>
+      【答え】ひかる！プラマイチェッカー
+    </div>
+
+  </div>
+</details>
+
+
+<!-- ============================
+     STEP9
+============================= -->
+<details class="accordion">
+  <summary>STEP9：今日のミッション（2日目）</summary>
+  <div class="content">
+
+    <div class="script-box">
+      <strong>先生の読み上げ</strong><br>
+      「今日はスイッチを作って、車を走らせます。」
+    </div>
+
+    <div class="slide-toggle" onclick="toggleSlide(this)">▶ スライド内容を開く</div>
+    <div class="slide-content">
+      今日のミッション：<br>
+      スイッチを作って、車を走らせよう！
+    </div>
+
+  </div>
+</details>
+
+
+<!-- ============================
+     STEP10
+============================= -->
+<details class="accordion">
+  <summary>STEP10：おさらい（モーター・絶縁）</summary>
+  <div class="content">
+
+    <div class="script-box">
+      <strong>先生の読み上げ</strong><br>
+      「昨日の復習です。モーターはつなぐ向きで回る方向が変わります。」
+    </div>
+
+    <div class="slide-toggle" onclick="toggleSlide(this)">▶ スライド内容を開く</div>
+    <div class="slide-content">
+      - モーターは向きで回転が変わる<br>
+      - 絶縁と短絡のクイズ
+    </div>
+
+  </div>
+</details>
+
+
+<!-- ============================
+     STEP11
+============================= -->
+<details class="accordion">
+  <summary>STEP11：スイッチのしくみ → 作ろう</summary>
+  <div class="content">
+
+    <div class="script-box">
+      <strong>先生の読み上げ</strong><br>
+      「ボタンを押すと、電気の道が切り替わります。スイッチは少し難しいので、ゆっくり進めましょう。」
+    </div>
+
+    <div class="slide-toggle" onclick="toggleSlide(this)">▶ スライド内容を開く</div>
+    <div class="slide-content">
+      - ボタンで電気の道が切り替わる<br>
+      - 左右でプラマイが入れ替わる<br>
+      - チェッカーで光り方が変わる<br><br>
+      【作業】<br>
+      STEPごとに作業<br>
+      困ったら手を挙げよう
+    </div>
+
+  </div>
+</details>
+
+
+<!-- ============================
+     STEP12
+============================= -->
+<details class="accordion">
+  <summary>STEP12：車体づくり → 初走行 → 完成！</summary>
+  <div class="content">
+
+    <div class="script-box">
+      <strong>先生の読み上げ</strong><br>
+      「ここからは車体づくりです。自由に形を決めてください。いよいよ初走行です。まっすぐ走るように調整してみましょう。世界にひとつだけの車が完成しました。」
+    </div>
+
+    <div class="slide-toggle" onclick="toggleSlide(this)">▶ スライド内容を開く</div>
+    <div class="slide-content">
+      - 段ボールの大きさは自由<br>
+      - タイヤ・シャフト・モーターを取り付ける<br>
+      - 前進・後進を確認<br>
+      - 逆に動いたら電線を入れ替える<br>
+      - 初走行！まっすぐ走るように調整<br><br>
+      世界にひとつだけのレスキューカー完成！
+    </div>
+
+  </div>
+</details>
+
+
+</div> <!-- container 終わり -->
+
+
+<!-- ============================
+     JavaScript（アコーディオン・文字サイズ）
+============================= -->
 <script>
-/* 文字サイズ切替 */
-(function(){
-  const body = document.body;
-  const buttons = document.querySelectorAll('#font-controls button');
-
-  const saved = localStorage.getItem('fontSizeMode') || 'medium';
-  apply(saved);
-  setActive(saved);
-
-  buttons.forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      const size = btn.dataset.size;
-      apply(size);
-      setActive(size);
-      localStorage.setItem('fontSizeMode', size);
-    });
-  });
-
-  function apply(size){
-    body.classList.remove('font-small','font-medium','font-large');
-    body.classList.add(`font-${size}`);
+/* スライド内容の開閉 */
+function toggleSlide(el) {
+  const content = el.nextElementSibling;
+  if (content.style.display === "block") {
+    content.style.display = "none";
+    el.textContent = "▶ スライド内容を開く";
+  } else {
+    content.style.display = "block";
+    el.textContent = "▼ スライド内容を閉じる";
   }
+}
 
-  function setActive(size){
-    buttons.forEach(btn=>{
-      btn.classList.toggle('active', btn.dataset.size === size);
-    });
-  }
-})();
+/* 文字サイズ切替（localStorage対応） */
+function setFontSize(size) {
+  document.body.style.fontSize =
+    size === "small" ? "14px" :
+    size === "large" ? "20px" : "16px";
 
-/* アコーディオン開閉 */
-document.querySelectorAll('.accordion-header').forEach(header=>{
-  header.addEventListener('click', ()=>{
-    const content = header.nextElementSibling;
-    const icon = header.querySelector('span');
+  localStorage.setItem("fontSize", size);
+}
 
-    const isOpen = content.style.display === 'block';
-    content.style.display = isOpen ? 'none' : 'block';
-    icon.textContent = isOpen ? '▶' : '▼';
-  });
-});
+/* ページ読み込み時に反映 */
+window.onload = function() {
+  const saved = localStorage.getItem("fontSize");
+  if (saved) setFontSize(saved);
+};
 </script>
+
+</body>
+</html>
 
 </body>
 </html>
